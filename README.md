@@ -6,4 +6,4 @@ Ouvrez `index.html` dans votre navigateur pour commencer une partie. Les positio
 
 Le plateau est rectangulaire et les équipes lancent le dé seulement après avoir deviné le mot. Cliquez sur le bouton "Afficher le mot" pour révéler le mot du tour.
 Les listes de mots sont regroupées par catégorie dans le dossier `words` et chargées automatiquement.
-L'interface adopte désormais des couleurs pastelles pour un rendu "dessin" plus mignon.
+L'interface adopte désormais un fond orange pétillant et une police manuscrite grâce à la librairie PaperCSS pour un rendu plus dessiné.
