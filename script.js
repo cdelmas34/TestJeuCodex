@@ -23,8 +23,8 @@ let board = [];
 let positions = JSON.parse(localStorage.getItem('positions')) || [0,0];
 let currentTeam = parseInt(localStorage.getItem('currentTeam') || '0');
 let timerInterval;
-let targetPosition;
-let prevPosition;
+let canRoll = false;
+let currentWord = '';
 
 function initBoard() {
     for(let i=0;i<totalSquares;i++) {
@@ -37,7 +37,7 @@ function initBoard() {
         boardElement.appendChild(square);
     }
     renderPawns();
-    updateTeamsDisplay();
+    startTurn();
 }
 
 function renderPawns() {
@@ -54,17 +54,33 @@ function updateTeamsDisplay() {
     teamsElement.textContent = `Tour de l\'équipe ${currentTeam+1}`;
 }
 
+function startTurn() {
+    rollBtn.disabled = true;
+    canRoll = false;
+    diceResultSpan.textContent = '';
+    updateTeamsDisplay();
+    if(positions[currentTeam] === totalSquares -1) {
+        alert(`\u00c9quipe ${currentTeam+1} a gagn\u00e9 !`);
+        return;
+    }
+    const color = board[positions[currentTeam]];
+    const wordList = words[color === 'finish' ? 'yellow' : color];
+    currentWord = wordList[Math.floor(Math.random()*wordList.length)];
+    wordDisplay.textContent = currentWord;
+    wordModal.classList.remove('hidden');
+}
+
 function rollDice() {
+    if(!canRoll) return;
     const result = Math.floor(Math.random()*6)+1;
     diceResultSpan.textContent = `Dé: ${result}`;
-    prevPosition = positions[currentTeam];
-    targetPosition = positions[currentTeam] + result;
-    if(targetPosition >= totalSquares) targetPosition = totalSquares -1;
-    const color = board[targetPosition];
-    const wordList = words[color === 'finish' ? 'yellow' : color];
-    const word = wordList[Math.floor(Math.random()*wordList.length)];
-    wordDisplay.textContent = word;
-    wordModal.classList.remove('hidden');
+    positions[currentTeam] += result;
+    if(positions[currentTeam] >= totalSquares) positions[currentTeam] = totalSquares -1;
+    renderPawns();
+    if(positions[currentTeam] === totalSquares -1) {
+        alert(`Équipe ${currentTeam+1} a gagné !`);
+    }
+    endTurn();
 }
 
 function startTimer() {
@@ -83,12 +99,17 @@ function startTimer() {
 }
 
 function guessed() {
-    positions[currentTeam] = targetPosition;
-    endTurn();
+    clearInterval(timerInterval);
+    timerSpan.textContent = '';
+    wordModal.classList.add('hidden');
+    rollBtn.disabled = false;
+    canRoll = true;
 }
 
 function fail() {
-    positions[currentTeam] = prevPosition;
+    clearInterval(timerInterval);
+    timerSpan.textContent = '';
+    wordModal.classList.add('hidden');
     endTurn();
 }
 
@@ -96,11 +117,13 @@ function endTurn() {
     clearInterval(timerInterval);
     timerSpan.textContent = '';
     wordModal.classList.add('hidden');
-    renderPawns();
-    currentTeam = (currentTeam +1) % positions.length;
+    rollBtn.disabled = true;
+    canRoll = false;
     localStorage.setItem('positions', JSON.stringify(positions));
+    currentTeam = (currentTeam +1) % positions.length;
     localStorage.setItem('currentTeam', currentTeam);
-    updateTeamsDisplay();
+    renderPawns();
+    startTurn();
 }
 
 rollBtn.addEventListener('click', rollDice);
