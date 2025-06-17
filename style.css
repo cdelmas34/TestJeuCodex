@@ -1,0 +1,102 @@
+body {
+    font-family: "Comic Sans MS", "Comic Neue", cursive;
+    margin: 20px;
+    background: #fdfdfd;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(6, 60px);
+    grid-template-rows: repeat(5, 60px);
+    gap: 4px;
+    margin-bottom: 20px;
+    border: 3px dashed #888;
+    background: #fff;
+    width: max-content;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.square {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.15);
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.square.yellow { background: #FFF9C4; }
+.square.blue { background: #BBDEFB; }
+.square.green { background: #C8E6C9; }
+.square.red { background: #FFCDD2; }
+.square.purple { background: #E1BEE7; }
+.square.finish { background: #FFE082; }
+
+.pawn {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.pawn.team0 { background: #555; }
+.pawn.team1 { background: white; border:1px solid #555; }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.hidden { display: none; }
+
+.controls button {
+    margin-right: 10px;
+    padding: 6px 12px;
+    border: none;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.controls button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.teams {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    text-align: center;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictionary Local</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Pictionary Local</h1>
+    <div id="board" class="board"></div>
+    <div id="teams" class="teams"></div>
+    <div class="controls">
+        <button id="showWordBtn">Afficher le mot</button>
+        <button id="startTimerBtn">Démarrer le chrono</button>
+        <span id="timer"></span>
+        <button id="guessedBtn">Mot deviné !</button>
+        <button id="failBtn">Temps écoulé</button>
+        <button id="rollBtn" disabled>Lancer le dé</button>
+        <span id="diceResult"></span>
+    </div>
+
+    <div id="wordModal" class="modal hidden">
+        <div class="modal-content">
+            <p id="wordDisplay"></p>
+            <button id="closeModal">Fermer</button>
+        </div>
+    </div>
+
+    <script src="words/yellow.js"></script>
+    <script src="words/blue.js"></script>
+    <script src="words/green.js"></script>
+    <script src="words/red.js"></script>
+    <script src="words/purple.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
