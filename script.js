@@ -12,13 +12,7 @@ const wordDisplay = document.getElementById('wordDisplay');
 const closeModalBtn = document.getElementById('closeModal');
 
 const categories = ['yellow','blue','green','red','purple'];
-const words = {
-    yellow: ['chaise','stylo','tasse','voiture','ordinateur'],
-    blue: ['chien','chat','professeur','docteur','lion'],
-    green: ['courir','sauter','manger','lire','danser'],
-    red: ['microscope','philosophie','astronaute','camouflage','hippopotame'],
-    purple: ['libre']
-};
+const words = window.wordLists || {};
 const totalSquares = 30;
 let board = [];
 let positions = JSON.parse(localStorage.getItem('positions')) || [0,0];
