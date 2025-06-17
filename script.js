@@ -2,6 +2,7 @@ const boardElement = document.getElementById('board');
 const teamsElement = document.getElementById('teams');
 const rollBtn = document.getElementById('rollBtn');
 const startTimerBtn = document.getElementById('startTimerBtn');
+const showWordBtn = document.getElementById('showWordBtn');
 const guessedBtn = document.getElementById('guessedBtn');
 const failBtn = document.getElementById('failBtn');
 const diceResultSpan = document.getElementById('diceResult');
@@ -58,6 +59,7 @@ function startTurn() {
     rollBtn.disabled = true;
     canRoll = false;
     diceResultSpan.textContent = '';
+    showWordBtn.disabled = false;
     updateTeamsDisplay();
     if(positions[currentTeam] === totalSquares -1) {
         alert(`\u00c9quipe ${currentTeam+1} a gagn\u00e9 !`);
@@ -66,8 +68,13 @@ function startTurn() {
     const color = board[positions[currentTeam]];
     const wordList = words[color === 'finish' ? 'yellow' : color];
     currentWord = wordList[Math.floor(Math.random()*wordList.length)];
+    wordModal.classList.add('hidden');
+}
+
+function showWord() {
     wordDisplay.textContent = currentWord;
     wordModal.classList.remove('hidden');
+    showWordBtn.disabled = true;
 }
 
 function rollDice() {
@@ -102,6 +109,7 @@ function guessed() {
     clearInterval(timerInterval);
     timerSpan.textContent = '';
     wordModal.classList.add('hidden');
+    showWordBtn.disabled = true;
     rollBtn.disabled = false;
     canRoll = true;
 }
@@ -110,6 +118,7 @@ function fail() {
     clearInterval(timerInterval);
     timerSpan.textContent = '';
     wordModal.classList.add('hidden');
+    showWordBtn.disabled = true;
     endTurn();
 }
 
@@ -117,6 +126,7 @@ function endTurn() {
     clearInterval(timerInterval);
     timerSpan.textContent = '';
     wordModal.classList.add('hidden');
+    showWordBtn.disabled = true;
     rollBtn.disabled = true;
     canRoll = false;
     localStorage.setItem('positions', JSON.stringify(positions));
@@ -130,6 +140,7 @@ rollBtn.addEventListener('click', rollDice);
 startTimerBtn.addEventListener('click', startTimer);
 guessedBtn.addEventListener('click', guessed);
 failBtn.addEventListener('click', fail);
+showWordBtn.addEventListener('click', showWord);
 closeModalBtn.addEventListener('click', ()=> wordModal.classList.add('hidden'));
 
 initBoard();
