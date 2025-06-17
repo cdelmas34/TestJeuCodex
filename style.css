@@ -1,7 +1,7 @@
 body {
-    font-family: "Comic Sans MS", "Comic Neue", cursive;
+    font-family: 'Patrick Hand', 'Comic Sans MS', 'Comic Neue', cursive;
     margin: 20px;
-    background: #fdfdfd;
+    background: #FFA726;
     color: #333;
 }
 
@@ -16,18 +16,20 @@ h1 {
     grid-template-columns: repeat(6, 60px);
     grid-template-rows: repeat(5, 60px);
     gap: 4px;
-    margin-bottom: 20px;
-    border: 3px dashed #888;
+    margin: 0 auto 20px auto;
+    border: 4px dashed #333;
     background: #fff;
     width: max-content;
-    padding: 4px;
-    border-radius: 8px;
+    padding: 8px;
+    border-radius: 10px;
+    transform: rotate(-2deg);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .square {
     width: 60px;
     height: 60px;
-    border: 1px solid #bbb;
+    border: 2px solid #555;
     display: flex;
     align-items: center;
     justify-content: center;

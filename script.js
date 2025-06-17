@@ -29,6 +29,7 @@ function initBoard() {
         square.className = `square ${color}`;
         square.id = 'sq'+i;
         square.textContent = i+1;
+        square.style.transform = `rotate(${(Math.random()*4-2).toFixed(2)}deg)`;
         boardElement.appendChild(square);
     }
     renderPawns();
