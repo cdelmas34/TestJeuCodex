@@ -69,7 +69,6 @@ function startTurn() {
 function showWord() {
     wordDisplay.textContent = currentWord;
     wordModal.classList.remove('hidden');
-    showWordBtn.disabled = true;
 }
 
 function rollDice() {
